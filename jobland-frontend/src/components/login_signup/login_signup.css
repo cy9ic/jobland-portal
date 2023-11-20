@@ -1,0 +1,13 @@
+.right-container ,.left-container{   
+    transition: all 1s;
+}
+
+.wrapper.moved .left-container{
+    transform: translate(100%);
+
+}
+
+.wrapper.moved .right-container{
+    transform: translate(-100%);
+
+}
