@@ -81,7 +81,7 @@ const toggle = async ()=>{
 
     </span>
 
-    <ul className='flex gap-10 mt-24'>
+    <ul className='flex gap-10 mt-12'>
      <li>
 
         <button className='flex text-xl font-semibold border-2 border-black rounded-3xl p-2 gap-2 hover:bg-black hover:text-white'>
@@ -108,6 +108,13 @@ const toggle = async ()=>{
     
 
     <form action="post" className='flex flex-col [&>*]:p-5 [&>*]:rounded-xl [&>*]:text-2xl [&>*]:font-semibold [&>label]:mt-6 [&>input]:w-[600px] [&>button]:p-9 [&>button]:rounded-3xl'>
+            
+  <select>
+    <option value="0">Select Role:</option>
+    <option value="1">Recruiter</option>
+    <option value="2">Candidate</option>
+    
+  </select>
 
         <label htmlFor="email">Email <span className='text-red-600'>*</span></label>
         <input type="text" placeholder='email@gmail.com' />
