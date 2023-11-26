@@ -14,7 +14,12 @@ const userSchema = new mongoose.Schema({
       type: String,
       enum: ['recruiter', 'candidate'], 
       default: 'user'
+    },
+    verified : {
+      type:Boolean,
+      default:false
     }
+
   });
 
   const User = mongoose.model("User",userSchema);
