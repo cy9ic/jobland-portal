@@ -33,7 +33,7 @@ useEffect(()=>{console.log(props.data);console.log(props.data.role)},[]);
           </>):<>
           <div className={`${props.data.verified===false?"blur-md":""} flex w-[100%]`}>
           <LeftContainer func={handleclick}/>
-          <RecruiterPosting/>
+          <RecruiterPosting email={props.data.userEmail}/>
           
           </div>
           
@@ -50,11 +50,11 @@ useEffect(()=>{console.log(props.data);console.log(props.data.role)},[]);
 
           {props.data.role==='candidate'?<>
           
-          <CandidateProfile/>
+          <CandidateProfile email={props.data.userEmail}/>
           
           </>:<>
           
-          <RecruiterDashboard/>
+          <RecruiterDashboard email={props.data.userEmail}/>
           </>}
         </>
       ) : (

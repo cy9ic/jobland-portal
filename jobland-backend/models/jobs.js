@@ -14,11 +14,7 @@ const JobSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    JobTitle:{
-        type:String,
-        required:true
-    },
-    company:{
+      company:{
         type:String,
         required:true
     },

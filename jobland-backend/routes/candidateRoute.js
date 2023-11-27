@@ -1,5 +1,5 @@
 import express from "express"    
-import { createCandidateProfile } from "../controllers/candidateController.js";
+import { createCandidateProfile, getCandidate } from "../controllers/candidateController.js";
 const candidateRoute = express.Router();
 
 import multer from 'multer';
@@ -18,6 +18,8 @@ const upload = multer({
   },
 });
 
+
+candidateRoute.get('/getProfile',getCandidate);
 candidateRoute.post('/createProfile' ,upload.single('resume'),createCandidateProfile);
 export {candidateRoute};
 

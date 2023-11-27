@@ -1,5 +1,5 @@
 import express from "express"
-import { createRecruiterProfile } from "../controllers/recruiterController.js";
+import { createRecruiterProfile, getProfile } from "../controllers/recruiterController.js";
 import multer from "multer"
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -11,4 +11,5 @@ const upload = multer({
 const recruiterRoute = express.Router();
 
 recruiterRoute.post('/createProfile' ,upload.single('companyLogo') ,createRecruiterProfile);
+recruiterRoute.get('/getProfile',getProfile);
 export { recruiterRoute};

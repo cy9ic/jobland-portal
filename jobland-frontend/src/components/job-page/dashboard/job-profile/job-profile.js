@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import google from "../../../../assets/google-color-icon.svg"
 import { FaFacebook ,FaTwitter,FaLinkedin } from "react-icons/fa";
 import AppliedCard from './applied_card/applied';
-export default function CandidateProfile() {
+import axios from "axios";
+
+export default function CandidateProfile(props) {
+    const [userdata , change] = useState([]);
+    const getData = async ()=>{
+        const email = props.email;
+        console.log(email);
+        try {
+            const data = await axios.get('http://localhost:3001/candidate/getProfile',{ params: { email: email } });
+            change(data.data.token);
+            console.log(data.data.token);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(()=>{
+        getData();
+    },[])
   return (
     <>
     <div className='w-[80%] bg-gray-100 overflow-auto '>
@@ -27,13 +44,16 @@ export default function CandidateProfile() {
 
             <div className='flex flex-col place-content-evenly '>
                 <div className='flex flex-col'>
-                <span className='text-4xl font-semibold'>Harkaran Singh</span>
+                <span className='text-4xl font-semibold'>{userdata.name}</span>
                 <span className='text-xl text-gray-400'>Web developer</span>
                 </div>
                 <hr className='mx-[-50px]' />
-                <span className='text-gray-400'>Email: <span className='text-cyan-700'>harkaran0010@gmail.com</span></span>
-                <span className='text-gray-400'>Contact: <span className='text-cyan-700'>+919988944141</span></span>
-                <span className='text-gray-400'>Location: <span className='text-cyan-700'>Chandigarh, India</span></span>
+                <span className='text-gray-400'>Email: <span className='text-cyan-700'>{userdata.email}</span></span>
+                <span className='text-gray-400'>Contact: <span className='text-cyan-700'>{userdata.phoneNumber}</span></span>
+                <span className='text-gray-400'>Location: <span className='text-cyan-700'>{userdata.country}</span></span>
+                <span className='text-gray-400'>College: <span className='text-cyan-700'>dasdasd</span></span>
+                <span className='text-gray-400'>LinkedIn Profile: <span className='text-cyan-700'>{userdata.linkedinProfile}</span></span>
+                <span className='text-gray-400'>Personal Website: <span className='text-cyan-700'>{userdata.personalWebsite}</span></span>
             </div>
 
             <div className='flex flex-col w-[25%] py-10'>

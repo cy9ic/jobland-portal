@@ -1,9 +1,32 @@
 import React from 'react'
 import { FaLinkedin ,FaTwitter,FaFacebook } from 'react-icons/fa'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from "axios"
 import google from "../../../../../assets/google-color-icon.svg";
 import RecruiterCard from './recruiter-card/rcard';
-export default function RecruiterDashboard() {
+export default function RecruiterDashboard(props) {
+    const [userdata , change] = useState([]);
+
+    const getData = async ()=>{
+        const email = props.email;
+        console.log(email);
+        try {
+            const data = await axios.get('http://localhost:3001/recruiter/getProfile',{ params: { email: email } });
+            change(data.data.token);
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(()=>{
+        getData();
+        console.log(userdata);
+    },[])
+
   return (
+
     <>
     <div className='w-[80%] bg-gray-100 overflow-auto '>
         <div className='w-[75%] m-10 bg-white flex place-content-evenly border-2  h-[30%] rounded-xl '>
@@ -24,14 +47,14 @@ export default function RecruiterDashboard() {
 
             <div className='flex flex-col place-content-evenly '>
                 <div className='flex flex-col'>
-                <span className='text-4xl font-semibold'>Harkaran Singh</span>
-                <span className='text-xl text-gray-400'>Web developer</span>
+                <span className='text-4xl font-semibold'>{userdata.name}</span>
+                <span className='text-xl text-gray-400'>{userdata.position}</span>
                 </div>
                 <hr className='mx-[-50px]' />
-                <span className='text-gray-400'>Email: <span className='text-cyan-700'>harkaran0010@gmail.com</span></span>
-                <span className='text-gray-400'>Contact: <span className='text-cyan-700'>+919988944141</span></span>
+                <span className='text-gray-400'>Email: <span className='text-cyan-700'>{userdata.email}</span></span>
+                <span className='text-gray-400'>Contact: <span className='text-cyan-700'>{userdata.phoneNumber}</span></span>
                 <span className='text-gray-400'>Location: <span className='text-cyan-700'>Chandigarh, India</span></span>
-                <span className='text-gray-400'>Company <span className='text-cyan-700'>Google Inc.</span></span>
+                <span className='text-gray-400'>Company <span className='text-cyan-700'>{userdata.company}</span></span>
             </div>
 
            
