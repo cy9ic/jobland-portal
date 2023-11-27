@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const CandidateSchema = mongoose.Schema({
-    CandidateName:{
+    name:{
         type:String,
         required:true
     },
@@ -13,22 +13,18 @@ const CandidateSchema = mongoose.Schema({
     resume: {
         data: Buffer, 
         contentType: String ,
-        required:true
     },
     country:{
         type:String , 
         required:true
     },
-    JobTitle:{
-        type:String,
-        required:true
-    }
-    ,
+   
+    
     dateOfBirth: {
         type:Date,
         required:true
     },
-    Gender : {
+    gender : {
         type:String,
         required:true
     },
@@ -42,13 +38,13 @@ const CandidateSchema = mongoose.Schema({
     }
     ,
     education:{
-        fieldOfStudy:String,
-        institution:String,
-        GraduationYear:String
+        fieldOfStudy:{type:String},
+         institution: { type: String },
+        graduationYear: { type: String }
     },
     personalWebsite:{
         type:String,
-        default:""
+        default:"sa"
     }
     
 });

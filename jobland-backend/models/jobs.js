@@ -2,7 +2,7 @@ import mongoose, { Mongoose, mongo } from "mongoose";
 
 const JobSchema = mongoose.Schema({
     
-    jobType:{
+    jobTitle:{
         type:String,
         required:true
     },
@@ -23,6 +23,15 @@ const JobSchema = mongoose.Schema({
         required:true
     },
     postedBy:{
+        type:String,
+        required:true
+    },
+    lowerEndcost:{
+        type:String,
+        required:true
+    }
+    ,
+    higherEndCost:{
         type:String,
         required:true
     }

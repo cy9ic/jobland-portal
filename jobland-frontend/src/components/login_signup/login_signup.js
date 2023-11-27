@@ -6,14 +6,15 @@ import mang from "../../assets/mang.png"
 import "./login_signup.css"
 import { useNavigate } from 'react-router-dom';
 
+import axios from "axios"
 
-export default function LoginPage() {
+export default function LoginPage(props) {
     const [signin , change] = useState(false);
 const history = useNavigate();
     function delay(time) {
         return new Promise(resolve => setTimeout(resolve, time));
       }
-      
+
 const toggle = async ()=>{
     let element = document.getElementById('parent-container');
     element.classList.toggle('moved');
@@ -24,10 +25,12 @@ const toggle = async ()=>{
     let regbtn = document.getElementById("registerbtn");
     let confirmplabel = document.getElementById("confirmp");
     let confirmpinput = document.getElementById("confirmp2");
+    let abc = document.getElementById("getSelect");
     delay(250).then(()=>{
         if(signin===false){
             confirmpinput.classList.toggle("hidden");
             confirmplabel.classList.toggle("hidden");
+            abc.classList.toggle('hidden');
             start.innerHTML="";
             have_acc.innerHTML="";
             signinbtn.innerHTML="";
@@ -39,6 +42,7 @@ const toggle = async ()=>{
         }else{
             confirmpinput.classList.toggle("hidden");
             confirmplabel.classList.toggle("hidden");
+            abc.classList.toggle('hidden');
             start.innerHTML="";
             have_acc.innerHTML="";
             signinbtn.innerHTML="";
@@ -53,6 +57,68 @@ const toggle = async ()=>{
 
     
     
+}
+const signupSubmit = async (e)=>{
+    e.preventDefault();
+    
+    
+
+    //Key Value Pairs Formation
+    const formData = new FormData(e.target);
+    const formObject = {};
+    
+
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+
+    })
+console.log(formObject);
+    if(formObject.password!==formObject.confirmPassword){
+        alert("Passwords dont match!");
+        document.getElementById("signupform").reset();
+        return;
+    }
+    try {
+        
+        const response = await axios.post("http://localhost:3001/user/registerUser",formObject)
+        
+        console.log(response);
+        
+        alert("User registered successfully !");
+        
+        
+    } catch (error) {
+        console.log(error)   ;
+    }
+     document.getElementById("signupform").reset();
+    
+
+    
+}
+
+const handleSignIn = async (e)=>{
+    e.preventDefault();
+     //Key Value Pairs Formation
+     const formData = new FormData(e.target);
+     const formObject = {};
+     
+ 
+     formData.forEach((value, key) => {
+       formObject[key] = value;
+     });
+
+
+    try {
+
+        const response =await axios.post("http://localhost:3001/user/loginValidation",formObject);
+        console.log(response);
+        props.user(response.data.user);
+        history('/jobs');
+        
+        
+    } catch (error) {
+        console.log(error);
+    }
 }
   return (
     <>
@@ -107,25 +173,30 @@ const toggle = async ()=>{
     </span>
     
 
-    <form action="post" className='flex flex-col [&>*]:p-5 [&>*]:rounded-xl [&>*]:text-2xl [&>*]:font-semibold [&>label]:mt-6 [&>input]:w-[600px] [&>button]:p-9 [&>button]:rounded-3xl'>
+    <form id="signupform" onSubmit={signin===false?signupSubmit:handleSignIn} className='flex flex-col [&>*]:p-5 [&>*]:rounded-xl [&>*]:text-2xl [&>*]:font-semibold [&>label]:mt-6 [&>input]:w-[600px] [&>button]:p-9 [&>button]:rounded-3xl'>
             
-  <select>
+  <select name='role' className='' id='getSelect'>
     <option value="0">Select Role:</option>
-    <option value="1">Recruiter</option>
-    <option value="2">Candidate</option>
+    <option value="recruiter">Recruiter</option>
+    <option value="candidate">Candidate</option>
     
   </select>
 
         <label htmlFor="email">Email <span className='text-red-600'>*</span></label>
-        <input type="text" placeholder='email@gmail.com' />
+        <input required  type="text" id='email' name="email" placeholder='email@gmail.com' />
 
         <label htmlFor="password">Password <span className='text-red-600'>*</span> </label>
-        <input type="password" placeholder='Enter Password' />
+        <input required type="password" id="password" name="password" placeholder="Enter Password" />
         
         <label htmlFor="confirmpass" id='confirmp'>Confirm password <span className='text-red-600'>*</span></label>
-        <input type="password" id='confirmp2'  placeholder='confirm your password' />
+        <input
+        type="password"
+        id="confirmp2"
+        name="confirmPassword"
+        placeholder="Confirm your password"
+      />
 
-        <button id='registerbtn' type='submit' className={` bg-green-500 mt-10 hover:bg-black hover:text-white`} >
+        <button   id='registerbtn' type='submit' className={` bg-green-500 mt-10 hover:bg-black hover:text-white`} >
             Register Now
         </button>
     </form>
