@@ -1,6 +1,8 @@
 import mongoose, { mongo } from "mongoose";
+import dotenv from "dotenv"
+dotenv.config();
 
-mongoose.connect("mongodb+srv://harkaran0010:bVBORTSMON05kaU4@cluster0.yntzqcg.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect(process.env.DB_URL)
 .then(console.log("Database is connected")).catch((err)=>{console.log(err)});
 
 const  db = mongoose.connection;
