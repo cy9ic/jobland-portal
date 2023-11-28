@@ -1,8 +1,15 @@
 import React, { useEffect,useState } from 'react'
 import google from "../../../../assets/google-color-icon.svg"
+import facebook from "../../../../assets/facebook-round-color-icon.svg"
+
+import macdonald from "../../../../assets/mcdonald-s-15-logo-svgrepo-com.svg";
+import snapchat from "../../../../assets/snapchat-logo-svgrepo-com.svg";
+import twitter from "../../../../assets/twitter-3-logo-svgrepo-com.svg";
+import apple from "../../../../assets/apple-black-logo-svgrepo-com.svg";
 import { FaFacebook ,FaTwitter,FaLinkedin } from "react-icons/fa";
 import AppliedCard from './applied_card/applied';
 import axios from "axios";
+
 
 export default function CandidateProfile(props) {
     const [userdata , change] = useState([]);
@@ -87,15 +94,13 @@ export default function CandidateProfile(props) {
             
         </div>
         <div className='flex flex-col gap-y-5 mt-10'>
-            <AppliedCard/>
-            <AppliedCard/>
-            <AppliedCard/>
-            <AppliedCard/>
-            <AppliedCard/>
-            <AppliedCard/>
-            <AppliedCard/>
-            <AppliedCard/>
-            <AppliedCard/>
+            <AppliedCard img={google}/>
+            <AppliedCard img={facebook}/>
+            <AppliedCard img={snapchat}/>
+            <AppliedCard img={apple}/>
+            <AppliedCard img={twitter}/>
+            <AppliedCard img={macdonald}/>
+        
             </div>
         </div>
     </div>

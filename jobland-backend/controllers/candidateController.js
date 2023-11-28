@@ -61,6 +61,7 @@ export const getCandidate =async (req, res)=>{
             return res.status(400).json({message:"Canidate Not found",email:email});
         }
 
+
         const token = jwt.sign({
             id:candidate._id,email,
         },process.env.SECRET_KEY,{expiresIn:"2h"});

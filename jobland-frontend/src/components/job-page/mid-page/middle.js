@@ -1,5 +1,11 @@
 import React from 'react'
 import JobCard from './job-cards/jcard'
+import google from "../../../assets/google-color-icon.svg";
+import facebook from "../../../assets/facebook-round-color-icon.svg"
+import macdonald from "../../../assets/mcdonald-s-15-logo-svgrepo-com.svg";
+import snapchat from "../../../assets/snapchat-logo-svgrepo-com.svg";
+import twitter from "../../../assets/twitter-3-logo-svgrepo-com.svg";
+import apple from "../../../assets/apple-black-logo-svgrepo-com.svg";
 export default function Middle() {
   return (
     <div className=' main w-[50%] h-[100vh]  flex flex-col bg-gray-100  border-r-[1.5px] overflow-scroll  overflow-x-hidden'>
@@ -24,12 +30,12 @@ export default function Middle() {
         </div>
 
         <div className='card-div flex flex-col gap-16 mt-10  '> 
-        <JobCard/>
-        <JobCard/>
-        <JobCard/>
-        <JobCard/>
-        <JobCard/>
-        <JobCard/>
+        <JobCard img={google}/>
+        <JobCard img={facebook}/>
+        <JobCard img={twitter}/>
+        <JobCard img={snapchat}/>
+        <JobCard img={macdonald}/>
+        <JobCard img={apple}/>
         <JobCard/>
         </div>
     </div>
